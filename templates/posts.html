@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <button type="submit" class="btn btn-default" id="all">Добавить отзыв</button>
+    <form action="/addpost/"method="post" id="form" style="display:none">
+    {% csrf_token %}{{ form.as_p }}
+    <button type="submit" class="btn btn-default">Отправить</button>
+    </form>
+    <div>
+        {% for post in all_posts %}
+           <div>
+            {{ post.fio }}
+            {{ post.date }}
+           </div>
+            <div>{{ post.id_rating }}</div>
+            <div>{{ post.content }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+    $('#all').click(function(){
+        $(this).hide();
+        $('#form').css({'display': 'block'});
+    });
+    </script>
+    <script type="text/javascript">
+    $(function(){
+    {% if messages %}
+        {% for message in messages %}
+           alert('{{ message.message }}');
+        {% endfor %}
+    {% endif %}
+    });
+    </script>
+{% endblock %}

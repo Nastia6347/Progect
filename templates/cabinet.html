@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if username %}
+        {{ username }}
+        {% for post in posts %}
+            <div>
+                {% if post.is_active == True %}
+                    <div style="background-color: green">
+                    {{ post.content }}
+                    {{ post.date }}
+                    </div>
+                {% else %}
+                    <div style="background-color: red">
+                    {{ post.content }}
+                    {{ post.date }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3>Для просмотра этой страници <a href="/login/">авторизуйтесь</a> или <a href="/register/">зарегистрируйтесь</a> на сайте</h3>
+    {% endif %}
+{% endblock %}

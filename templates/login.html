@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3>Вы уже авторизованы</h3>
+    {% else %}
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="username">Имя пользователя:</label>
+            <input type="text" name="username" id="username">
+            <label for="password">Пароль:</label>
+            <input type="password" name="password" id="password">
+            {% if login_error %}
+                <label class="error">{{ login_error }}</label>
+            {% endif %}
+        </div>
+        <div><input class="button" type="submit" value="Войти"></div>
+    </form>
+    <div><a href="/register/">Регистрация</a></div>
+    {% endif %}
+{% endblock %}
